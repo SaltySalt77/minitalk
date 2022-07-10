@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 10:22:36 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 18:31:45 by hyna             ###   ########.fr       */
+/*   Updated: 2022/07/10 20:30:11 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	receive_processor(int signo, siginfo_t	*info, void	*context)
 	static int	count;
 	static char	letter;
 
-	(void) info;
 	(void) context;
+	ft_printf("%d\n", info->si_pid);
 	if (signo == SIGUSR1)
 		letter |= 1;
 	count++;

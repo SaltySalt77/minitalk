@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:47:31 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 19:12:54 by hyna             ###   ########.fr       */
+/*   Updated: 2022/07/10 20:31:39 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char	**argv)
 	pid = ft_atoi(argv[1]);
 	if (pid < 100 || pid > 99998)
 		return (0);
+	ft_printf("%d\n", getpid());
 	transmit_processor(pid, argv[2]);
 	while (1)
 		sleep(1);

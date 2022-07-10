@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:47:56 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 20:13:42 by hyna             ###   ########.fr       */
+/*   Updated: 2022/07/10 20:29:13 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(void)
 	err = sigaction(SIGUSR2, &act, NULL);
 	if (err == -1)
 		exit(1);
-	printf("testing\n");
 	while (1)
 		sleep(1);
 	return (0);

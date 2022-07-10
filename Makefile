@@ -6,7 +6,7 @@
 #    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/09 20:09:27 by hyna              #+#    #+#              #
-#    Updated: 2022/07/10 20:13:59 by hyna             ###   ########.fr        #
+#    Updated: 2022/07/10 20:57:55 by hyna             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,18 @@ SRCS_PATH = ./srcs
 SRV_SRCS = $(addprefix $(SRCS_PATH)/, $(SRV_SRCS_NAME))
 CLI_SRCS = $(addprefix $(SRCS_PATH)/, $(CLI_SRCS_NAME))
 
+SRV_SRCS_BONUS = $(SRV_SRCS:.c=_bonus.c)
+CLI_SRCS_BONUS = $(CLI_SRCS:.c=_bonus.c)
+
 SRV_OBJS_NAME = $(SRV_SRCS_NAME:.c=.o)
 CLI_OBJS_NAME = $(CLI_SRCS_NAME:.c=.o)
+
 OBJS_PATH = ./objs
 SRV_OBJS = $(addprefix $(OBJS_PATH)/, $(SRV_OBJS_NAME))
 CLI_OBJS = $(addprefix $(OBJS_PATH)/, $(CLI_OBJS_NAME))
+
+SRV_OBJS_BONUS = $(SRV_OBJS:.o=_bonus.o)
+CLI_OBJS_BONUS = $(CLI_OBJS:.o=_bonus.o)
 
 all : ft_printf $(NAME) $(NAME2)
 
@@ -44,6 +51,10 @@ $(NAME2) : $(CLI_OBJS)
 $(OBJS_PATH)/%.o : $(SRCS_PATH)/%.c
 	@mkdir $(OBJS_PATH) 2> /dev/null || true
 	$(CC) $(INC_LINK) $(CCFLAGS) -c $< -o $@
+
+bonus : ft_printf $(SRV_OBJS_BONUS) $(CLI_OBJS_BONUS)
+	$(CC) $(CCFLAGS) $(LIBS) -o $(NAME) $(SRV_OBJS_BONUS)
+	$(CC) $(CCFLAGS) $(LIBS) -o $(NAME2) $(CLI_OBJS_BONUS)
 
 ft_printf :
 	@$(MAKE) -C ./lib/ft_printf

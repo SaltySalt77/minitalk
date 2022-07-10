@@ -1,49 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cli_transmitter.c                                  :+:      :+:    :+:   */
+/*   srv_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 09:36:27 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 20:57:26 by hyna             ###   ########.fr       */
+/*   Created: 2022/07/09 19:47:56 by hyna              #+#    #+#             */
+/*   Updated: 2022/07/10 21:08:51 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "minitalk.h"
+#include "server.h"
 #include <stdio.h>
 
-static int	get_bit(char c)
+int	main(void)
 {
-	if (c & 128)
-		return (1);
+	int					pid;
+	int					err;
+	struct sigaction	act;
+
+	pid = (int) getpid();
+	ft_printf("PID : %d\n", pid);
+	act.sa_sigaction = receive_processor;
+	act.sa_flags = SA_SIGINFO;
+	sigemptyset(&act.sa_mask);
+	err = sigaction(SIGUSR1, &act, NULL);
+	if (err == -1)
+		exit(1);
+	err = sigaction(SIGUSR2, &act, NULL);
+	if (err == -1)
+		exit(1);
+	while (1)
+		sleep(1);
 	return (0);
-}
-
-static void	transmitter(int pid, char c)
-{
-	int	i;
-
-	i = 0;
-	while (i < 8)
-	{
-		if (get_bit(c))
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		usleep(100);
-		i++;
-		c <<= 1;
-	}
-}
-
-int	transmit_processor(int pid, char	*message)
-{
-	int	i;
-
-	i = 0;
-	while (message[i])
-		transmitter(pid, message[i++]);
-	transmitter(pid, 127);
-	exit(0);
 }
