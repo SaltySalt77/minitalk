@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 09:36:27 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 19:34:23 by hyna             ###   ########.fr       */
+/*   Updated: 2022/07/10 20:23:34 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,26 @@ int	transmit_processor(int pid, char	*message)
 	transmitter(pid, 127);
 	exit(0);
 }
+
+void	put_success_message(int signo)
+{
+	ft_printf("First handshaking succeded!\n");
+}
+
+void	wait_until_handshake(int srv_pid, char	*message)
+{
+	char	*cli_pid;
+	int		i;
+	int		flag;
+	
+	i = 0;
+	cli_pid = ft_itoa(getpid());
+	if (cli_pid == NULL)
+		return ;
+	while (cli_pid[i])
+		transmitter(srv_pid, cli_pid[i++]);
+	signal(SIGUSR1, put_success_message);
+	while (1)
+		sleep(1);
+}
+

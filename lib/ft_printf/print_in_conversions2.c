@@ -6,12 +6,11 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 13:04:42 by hyna              #+#    #+#             */
-/*   Updated: 2022/06/24 14:48:13 by hyna             ###   ########.fr       */
+/*   Updated: 2022/04/09 16:05:03 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
 int	conversion_p(va_list	ap)
 {

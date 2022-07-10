@@ -6,12 +6,11 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:42:56 by hyna              #+#    #+#             */
-/*   Updated: 2022/06/24 14:49:12 by hyna             ###   ########.fr       */
+/*   Updated: 2022/04/09 15:44:07 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
 static int	check_base(char	*str)
 {
@@ -59,7 +58,7 @@ int	conversion_p_util(unsigned long long n, char	*base)
 
 	result = 0;
 	len = check_base(base);
-	if (len == 0 || len == 1)
+	if ((len == 0) || (len == 1))
 		return (-1);
 	else if (n == 0)
 		return (write(1, "0", 1));

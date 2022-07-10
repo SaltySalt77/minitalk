@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 10:22:36 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 16:56:16 by hyna             ###   ########.fr       */
+/*   Updated: 2022/07/10 20:16:26 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	put_message(char	*message, int	*idx, int *count, char	*letter)
 	*idx = 0;
 }
 
-static int unicode_handeler(unsigned char	letter)
+static int	unicode_handeler(unsigned char letter)
 {
 	if (letter >= 240)
 		return (3);
@@ -42,16 +42,14 @@ static int unicode_handeler(unsigned char	letter)
 		return (1);
 }
 
-void	receive_processor(int signo, siginfo_t	*info, void	*context)
+static void	receive_and_print_message(int signo)
 {
-	static char	message[103];
+	static char	message[104];
 	static int	idx;
 	static int	count;
 	static char	letter;
 	static int	flag = 100;
 
-	(void) info;
-	(void) context;
 	if (signo == SIGUSR1)
 		letter |= 1;
 	count++;
@@ -70,4 +68,30 @@ void	receive_processor(int signo, siginfo_t	*info, void	*context)
 		flag = 100;
 	}
 	letter <<= 1;
+}
+
+void	receive_processor(int signo, siginfo_t	*info, void	*context)
+{
+	static unsigned char	flag;
+	static char				pid[7];
+	static int				idx;
+
+	(void) info;
+	(void) context;
+	if (flag == 0)
+		flag++;
+	else if (pid[idx] != 127)
+	{
+		if (signo == SIGUSR1)
+			pid[idx] |= 1;
+		count++;
+		if (count == 8)
+			idx++;
+		else
+			pid[idx] <<= 1;
+	}
+	else if (pid[idx] == 127 && flag++ == 1)
+		kill(ft_atoi(pid), SIGUSR1);
+	else
+		receive_and_print_message(signo);
 }

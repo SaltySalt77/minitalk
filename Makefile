@@ -6,16 +6,16 @@
 #    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/09 20:09:27 by hyna              #+#    #+#              #
-#    Updated: 2022/07/10 13:32:33 by hyna             ###   ########.fr        #
+#    Updated: 2022/07/10 20:13:59 by hyna             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRV = server
-CLI = client
+NAME = server
+NAME2 = client
 CC = cc
 CCFLAGS = -Wall -Werror -Wextra
 INC_LINK = -I./inc
-LIBS = -L./lib/libft -lft\
+LIBS = -L./lib/ft_printf -lftprintf\
 
 SRV_SRCS_NAME = srv_main.c\
 				srv_receiver.c\
@@ -33,28 +33,28 @@ OBJS_PATH = ./objs
 SRV_OBJS = $(addprefix $(OBJS_PATH)/, $(SRV_OBJS_NAME))
 CLI_OBJS = $(addprefix $(OBJS_PATH)/, $(CLI_OBJS_NAME))
 
-all : libft $(SRV) $(CLI)
+all : ft_printf $(NAME) $(NAME2)
 
-$(SRV) : $(SRV_OBJS) 
-	$(CC) $(CCFLAGS) $(LIBS) -o $(SRV) $(SRV_OBJS)
+$(NAME) : $(SRV_OBJS) 
+	$(CC) $(CCFLAGS) $(LIBS) -o $(NAME) $(SRV_OBJS)
 
-$(CLI) : $(CLI_OBJS) 
-	$(CC) $(CCFLAGS) $(LIBS) -o $(CLI) $(CLI_OBJS)
+$(NAME2) : $(CLI_OBJS) 
+	$(CC) $(CCFLAGS) $(LIBS) -o $(NAME2) $(CLI_OBJS)
 
 $(OBJS_PATH)/%.o : $(SRCS_PATH)/%.c
 	@mkdir $(OBJS_PATH) 2> /dev/null || true
 	$(CC) $(INC_LINK) $(CCFLAGS) -c $< -o $@
 
-libft :
-	@$(MAKE) -C ./lib/libft
+ft_printf :
+	@$(MAKE) -C ./lib/ft_printf
 
 clean :
-	@$(MAKE) -C ./lib/libft clean
+	@$(MAKE) -C ./lib/ft_printf clean
 	rm -rf $(OBJS_PATH)
 
 fclean : clean
 	rm -rf ./lib/ft_printf/libftprintf.a
-	rm -rf $(SRV) $(CLI)
+	rm -rf $(NAME) $(NAME2)
 
 re : fclean all
 

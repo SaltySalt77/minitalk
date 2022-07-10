@@ -6,12 +6,11 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:28:19 by hyna              #+#    #+#             */
-/*   Updated: 2022/06/24 14:49:51 by hyna             ###   ########.fr       */
+/*   Updated: 2022/04/09 16:04:43 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
 static int	result_len(long long n, int base_len)
 {

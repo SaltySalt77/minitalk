@@ -6,12 +6,11 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 20:53:56 by hyna              #+#    #+#             */
-/*   Updated: 2022/06/24 14:46:00 by hyna             ###   ########.fr       */
+/*   Updated: 2022/04/09 15:13:38 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
 static int	which_conversion(char c, va_list ap)
 {
@@ -60,7 +59,7 @@ static int	check_format(const char	*format, va_list ap)
 		}
 		else
 		{
-			write(1, &(format[i]), 1); 
+			write(1, &(format[i]), 1);
 			result++;
 			i++;
 		}

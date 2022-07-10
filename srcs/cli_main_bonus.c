@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:47:31 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 19:12:54 by hyna             ###   ########.fr       */
+/*   Updated: 2022/07/10 20:23:31 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int	main(int argc, char	**argv)
 {
 	int	pid;
-
+	int	
 	if (argc != 3)
 		return (0);
 	pid = ft_atoi(argv[1]);

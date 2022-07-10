@@ -1,0 +1,7 @@
+main.c
+*.o
+*.a
+a.out
+test*
+printfTester
+ft_printf_tester
