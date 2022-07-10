@@ -6,7 +6,7 @@
 #    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/09 20:09:27 by hyna              #+#    #+#              #
-#    Updated: 2022/07/09 20:12:03 by hyna             ###   ########.fr        #
+#    Updated: 2022/07/10 13:32:33 by hyna             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,10 @@ INC_LINK = -I./inc
 LIBS = -L./lib/libft -lft\
 
 SRV_SRCS_NAME = srv_main.c\
+				srv_receiver.c\
 
 CLI_SRCS_NAME = cli_main.c\
+				cli_transmitter.c\
 
 SRCS_PATH = ./srcs
 SRV_SRCS = $(addprefix $(SRCS_PATH)/, $(SRV_SRCS_NAME))

@@ -1,33 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   srv_main.c                                         :+:      :+:    :+:   */
+/*   cli_transmitter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 19:47:56 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 14:10:49 by hyna             ###   ########.fr       */
+/*   Created: 2022/07/10 09:36:27 by hyna              #+#    #+#             */
+/*   Updated: 2022/07/10 15:15:48 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "minitalk.h"
-#include "server.h"
 #include <stdio.h>
 
-int	main(void)
+static int	get_bit(char c)
 {
-	int					pid;
-	struct sigaction	act;
-
-	pid = (int) getpid();
-	ft_printf("pid = %d\n", pid);
-	act.sa_sigaction = receive_processor;
-	act.sa_flags = SA_SIGINFO;
-	sigemptyset(&act.sa_mask);
-	sigaction(SIGUSR1, &act, NULL);
-	sigaction(SIGUSR2, &act, NULL);
-	while (1)
-		sleep(1);
+	if (c & 128)
+		return (1);
 	return (0);
+}
+
+static void	transmitter(int pid, char	c)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		if (get_bit(c))
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		usleep(100);
+		i++;
+		c <<= 1;
+	}
+}
+
+int	transmit_processor(int	pid, char	*message)
+{
+	int	i;
+
+	i = 0;
+	while (message[i])
+		transmitter(pid, message[i++]);
+	transmitter(pid, 127);
+	exit(0);
 }
