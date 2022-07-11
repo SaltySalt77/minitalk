@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   srv_receiver.c                                     :+:      :+:    :+:   */
+/*   srv_receiver_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 10:22:36 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 21:26:41 by hyna             ###   ########.fr       */
+/*   Created: 2022/07/11 12:04:38 by hyna              #+#    #+#             */
+/*   Updated: 2022/07/11 12:04:43 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,14 @@ static int	receive_and_print_message(int signo)
 void	receive_processor(int signo, siginfo_t	*info, void	*context)
 {
 	static unsigned char	flag;
+	int						err;
 
 	(void) context;
 	if (flag == 0)
 	{
-		kill(info->si_pid, SIGUSR1);
+		err = kill(info->si_pid, SIGUSR1);
+		if (err)
+			exit(1);
 		flag++;
 	}
 	else

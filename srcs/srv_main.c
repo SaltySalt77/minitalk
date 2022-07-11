@@ -6,14 +6,13 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:47:56 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 20:29:13 by hyna             ###   ########.fr       */
+/*   Updated: 2022/07/11 11:20:52 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "minitalk.h"
 #include "server.h"
-#include <stdio.h>
 
 int	main(void)
 {

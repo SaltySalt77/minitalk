@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cli_main.c                                         :+:      :+:    :+:   */
+/*   cli_main_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 19:47:31 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/10 21:13:37 by hyna             ###   ########.fr       */
+/*   Created: 2022/07/11 11:55:16 by hyna              #+#    #+#             */
+/*   Updated: 2022/07/11 11:55:24 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,31 @@
 #include "minitalk.h"
 #include "client.h"
 
-char	*message;
+char	*g_message;
 
-void	put_success_msg(int	signo,siginfo_t	*info, void	*context)
+void	put_success_msg(int signo, siginfo_t	*info, void	*context)
 {
-	(void)	signo;
-	(void)	context;
-	ft_printf(" * Handshake_Succeded *\n");
-	transmit_processor(info->si_pid, message);
+	(void) signo;
+	(void) context;
+	ft_printf(" * Handshake Succeded *\n");
+	transmit_processor(info->si_pid, g_message);
 }
 
 int	main(int argc, char	**argv)
 {
 	struct sigaction	act;
-	int	pid;
+	int					pid;
+	int					err;
 
 	if (argc != 3)
 		return (0);
 	pid = ft_atoi(argv[1]);
 	if (pid < 100 || pid > 99998)
 		return (0);
-	message = argv[2];
-	kill(pid, SIGUSR1);
+	g_message = argv[2];
+	err = kill(pid, SIGUSR1);
+	if (err)
+		exit(1);
 	act.sa_sigaction = put_success_msg;
 	act.sa_flags = SA_SIGINFO;
 	sigemptyset(&act.sa_mask);

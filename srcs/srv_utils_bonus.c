@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cli_main.c                                         :+:      :+:    :+:   */
+/*   srv_utils_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 19:47:31 by hyna              #+#    #+#             */
-/*   Updated: 2022/07/11 11:23:08 by hyna             ###   ########.fr       */
+/*   Created: 2022/07/11 12:11:46 by hyna              #+#    #+#             */
+/*   Updated: 2022/07/11 12:11:47 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_printf.h"
-#include "minitalk.h"
-#include "client.h"
 
-int	main(int argc, char	**argv)
+void	ft_bzero(void	*s, size_t	n)
 {
-	int	pid;
+	unsigned char	*tmp;
+	size_t			i;
 
-	if (argc != 3)
-		return (0);
-	pid = ft_atoi(argv[1]);
-	if (pid < 100 || pid > 99998)
-		return (0);
-	transmit_processor(pid, argv[2]);
-	while (1)
-		sleep(1);
-	return (0);
+	tmp = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+		tmp[i++] = 0;
 }
